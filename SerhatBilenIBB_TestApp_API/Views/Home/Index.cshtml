@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="map">
+
+</div>
+
+
+<script>
+    function initMap() {
+        var options = {
+            zoom: 7,
+            center: { lat: 41.015137, lng: 28.979530 }
+        }
+
+        var map = new google.maps.Map(document.getElementById('map'), options);
+    }
+</script>
+@Scripts.Render("~/scripts/bundle")
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB9Yue25WFIBh2DjPVkUuBECmfze7x7rY&callback=initMap&v=weekly"
+        defer></script>
+

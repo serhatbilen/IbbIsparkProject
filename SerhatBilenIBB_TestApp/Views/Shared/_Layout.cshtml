@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <style>
+        #map {
+            height: 800px;
+            width: 100%;
+        }
+    </style>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/bundles/dataTable")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/style/SweetAlert")
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    @Html.Partial("_Header")
+    @RenderBody()
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Serhat Bilen tarafından IBB' ye İş Mülakatı İçin Yapılmıştır.</p>
+    </footer>
+    @Scripts.Render("~/scripts/bundle")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB9Yue25WFIBh2DjPVkUuBECmfze7x7rY&callback=initMap&v=weekly"
+            defer></script>
+    @Scripts.Render("~/scripts/popper")
+    @Scripts.Render("~/scripts/main")
+    @Scripts.Render("~/scripts/dataTable")
+    @Scripts.Render("~/script/FontAwesome")
+    @Scripts.Render("~/script/Validations")
+    @Scripts.Render("~/script/SweetAlert")
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"79d98c890a23548e","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2023.2.0","si":100}' crossorigin="anonymous"></script>
+    @RenderSection("scripts", required: false)
+
+
+</body>
+</html>

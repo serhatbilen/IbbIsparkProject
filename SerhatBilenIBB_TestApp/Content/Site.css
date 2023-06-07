@@ -1,0 +1,45 @@
+﻿body {
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    /*max-width: 280px;*/
+}
+
+.addPage{
+    padding: 20px 30px;
+    margin: 50px 250px;
+    border: 1px solid #808080;
+    border-radius: 10px;
+}
+
+.parkList {
+    padding: 30px 10px;
+    margin: 10px 50px;
+}
+.field-validation-error {
+    display: block;
+    border: 1px solid #bc0000;
+    color: #bc0000;
+    padding: 5px 10px;
+    margin-right:0;
+    font-size:15px;
+    border-radius: 5px;
+    margin-top: 5px;
+}

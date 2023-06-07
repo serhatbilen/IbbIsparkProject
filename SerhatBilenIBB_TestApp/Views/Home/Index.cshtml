@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="map">
+
+</div>
+
+<div class="modal fade" id="isparkModal" tabindex="-1" role="dialog" aria-labelledby="isparkModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="isparkLabel">İspark Detay Bilgileri</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-stripped">
+                        <tr>
+                            <th>Park Adı</th>
+                            <td class="park-adi"></td>
+                        </tr>
+                        <tr>
+                            <th>Kapasite</th>
+                            <td class="park-kapasite"></td>
+                        </tr>
+                        <tr>
+                            <th>Park Tipi</th>
+                            <td class="park-tipi"></td>
+                        </tr>
+                        <tr>
+                            <th>Çalışma Saatleri</th>
+                            <td class="park-calisma-saati"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function initMap() {
+        var options = {
+            zoom: 10,
+            center: { lat: 41.015137, lng: 28.979530 }
+        };
+
+        var map = new google.maps.Map(document.getElementById('map'), options);
+
+        var $ispark = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+
+        for (var i = 0; i < $ispark.length; i++) {
+            AddMarker({ lat: $ispark[i].latitude, lng: $ispark[i].longitude }, $ispark[i].Id);
+        }
+        
+        function AddMarker(coordinates, uid) {
+            var marker = new google.maps.Marker({
+                position: coordinates,
+                map: map,
+                _id: uid
+            });
+
+            //var infoWindow = new google.maps.InfoWindow({
+            //    content: htmlData
+            //});
+
+            marker.addListener('click', function () {
+                /*infoWindow.open(map, marker);*/
+
+                var nesne = $(this)[0];
+                $.ajax({
+                    url: '@Url.Action("JsonDetay", "Ispark", null)',
+                    data: JSON.stringify({ uid: nesne._id }),
+                    type: 'POST',
+                    contentType: 'application/json',
+                    success: function (s) {
+                        console.log(s);
+                        $('#isparkModal .park-adi').text(s.park_name);
+                        $('#isparkModal .park-kapasite').text(s.capacity_of_park);
+                        $('#isparkModal .park-tipi').text(s.park_type_desc);
+                        $('#isparkModal .park-calisma-saati').text(s.working_time);
+                        $('#isparkModal').modal('show');
+                    },
+                    error: function () { }
+                })
+            });
+        }
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB9Yue25WFIBh2DjPVkUuBECmfze7x7rY&callback=initMap&v=weekly"
+        defer></script>

@@ -1,0 +1,94 @@
+﻿@model SerhatBilenIBB_TestApp.Models.ISPARKLAR
+<div class="modal fade" id="EkleModelPopUp" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Yeni Otopark Ekle</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Kaydet", "Ispark", FormMethod.Post, new { id = "isparkKayitForm" }))
+                {
+                    <table class="container text-center">
+                        <tr class="row">
+                            <td class="col col-6">
+                                <div>
+                                    @Html.LabelFor(x => x.park_name)
+                                    @Html.TextBoxFor(x => x.park_name, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.park_name)
+                                </div>
+                            </td>
+                            <td class="col col-6">
+                                <div>
+                                    @Html.LabelFor(x => x.location_name)
+                                    @Html.TextBoxFor(x => x.location_name, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.location_name)
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr class="row">
+                            <td class="col col-6">
+                                <div>
+                                    @Html.LabelFor(x => x.park_type_desc)
+                                    @Html.TextBoxFor(x => x.park_type_desc, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.park_type_desc)
+                                </div>
+                            </td>
+                            <td class="col col-6">
+                                <div>
+                                    @Html.LabelFor(x => x.capacity_of_park)
+                                    @Html.TextBoxFor(x => x.capacity_of_park, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.capacity_of_park)
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr class="row">
+                            <td class="col col-6">
+                                <div>
+                                    @Html.LabelFor(x => x.working_time)
+                                    @Html.TextBoxFor(x => x.working_time, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.working_time)
+
+                                </div>
+                            </td>
+                            <td class="col col-6">
+                                <div>
+                                    @Html.LabelFor(x => x.country_name)
+                                    @Html.TextBoxFor(x => x.country_name, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.country_name)
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr class="row">
+                            <td class="col col-6">
+                                <div>
+                                    @Html.LabelFor(x => x.latitude)
+                                    @Html.TextBoxFor(x => x.latitude, new { @class = "form-control" })
+                                </div>
+                            </td>
+                            <td class="col col-6">
+                                <div>
+                                    @Html.LabelFor(x => x.longitude)
+                                    @Html.TextBoxFor(x => x.longitude, new { @class = "form-control" })
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div style="margin-top:25px">
+                        @Html.HiddenFor(x => x.Id)
+                        @Html.HiddenFor(x => x.park_type_id)
+                        @Html.HiddenFor(x => x.updated)
+                        @Html.HiddenFor(x => x.author)
+                        <button id="isparkKayit" type="button" class="btn btn-success">
+                            <i class="fa-solid fa-floppy-disk"></i> Kaydet
+                        </button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
